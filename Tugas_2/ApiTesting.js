@@ -10,6 +10,7 @@ console.log ("PASSWORD:", process.env.PASSWORD1);
 let token;
 let bookingId;
 let bodyCreateBooking;
+let createDeleteResponse;
 
 describe("API Automation E2E Test", function () {
     before (async function () {
@@ -90,6 +91,18 @@ describe("API Automation E2E Test", function () {
 
         expect(createDeleteResponse.status).to.equal(201);
     })
+
+     afterEach(function () {
+        console.log(`----- Finished Test: ${this.currentTest.title} -----`);
+        if (createDeleteResponse) {
+          expect(createDeleteResponse.status).to.be.oneOf([200, 201]);
+        }
+      });
+    
+      // Hook sesudah semua test
+      after(function () {
+        console.log("----- All Booking Tests Completed -----");
+      });
 
 
 
